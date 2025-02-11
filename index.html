@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>Calculator</title>
+<style>
+
+  #container{ max-width: 1200px;
+              margin: 0 auto;
+              padding:  2%;
+            }
+@media only screen and (max-width:768px){
+  #container{
+    padding: 1%;
+  }
+}
+
+        div{
+            
+            border: 5px black inset;
+            border-radius: 20%;
+            outline: 5px red inset;
+            width: 300px;
+            height:450px ;
+            align-items: center;
+            
+           
+            
+          
+            
+            
+        }
+        h1{ background-color: brown;
+            color: rgb(241, 245, 3);
+            display: block;
+            text-align: center;
+            height: 60px;
+            
+            }
+
+            h2{
+
+                background-color: coral;
+                width: 200px;
+                height:50px;
+                border-radius: 5%;
+                padding-top: 8px;
+                margin-left: 50px;
+                text-align: center;
+                outline: 3px black ridge;
+
+            }
+            #num1{  
+
+                height: 50px;
+                width: 100x;
+                margin-left: 15px;
+                border: 3px black solid;
+                border-radius: 30px;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            
+            #num2{  height: 50px;
+                width: 100x;
+                margin-left: 15px;
+                border: 3px black solid;
+                border-radius: 30px;
+                text-align: center;
+                font-size: 20px;
+                }
+
+              #sub{
+                height: 40px;
+                width: 40px;
+                font-size: 30px;
+                
+              }
+
+              #add{
+                height: 40px;
+                width: 40px;
+                font-size: 30px;
+                margin-left: 20px;
+              }
+
+              #mul{
+                height: 40px;
+                width: 40px;
+                font-size: 30px;
+              }
+
+              #div{
+                height: 40px;
+                width: 40px;
+                font-size: 30px;
+              }
+
+              #clr{
+                height: 40px;
+                width: 60px;
+                font-size: 20px;
+              }
+
+              #add:hover{
+                font-size: 35px;
+                transition: 0.2s;
+                cursor: pointer;
+              }
+
+              
+              #sub:hover{
+                font-size: 35px;
+                transition: 0.2s;
+                cursor: pointer;
+              }
+
+              
+              #mul:hover{
+                font-size: 35px;
+                transition: 0.2s;
+                cursor: pointer;
+              }
+
+              
+              #div:hover{
+                font-size: 35px;
+                transition: 0.2s;
+                cursor: pointer;
+              }
+
+              
+              #clr:hover{
+                font-size: 21px;
+                transition: 0.2s;
+                cursor: pointer;
+                width: 65px;
+              }
+              #ans{background-color: aqua;
+                    color: black;
+            }
+
+            h3{  
+                text-align:center;
+                font-family: Georgia, 'Times New Roman', Times, serif;
+
+            }
+
+            
+</style>
+
+</head>
+<body>
+  
+    <h1>Digital Cyber World &#127758</h1>
+    <div id="container">
+    <h2 id="bs">Basic Calculator</h2>
+    <input type="number" placeholder="Enter Your First Value" id="num1"><br><br>
+    <input type="number" placeholder="Enter Your Second Value" id="num2">
+    <span id="btn">
+    <br><br><button id="add" onclick="addd()"> +</button>
+    <button id="sub" onclick="subb()"> -</button>
+    <button id="mul" onclick="mull()">*</button>
+    <button id="div" onclick="divv()">/</button>
+    <button id="clr" onclick="clrr()">Clear</button>
+    </span>
+    <h2 id="ans">Ans</h2>
+  
+    
+    
+    <h3>Created By Priyanshu </h3>
+    </div>
+<script>
+  let bs=document.getElementById("bs");
+let num1= document.getElementById("num1");
+let num2= document.getElementById("num2");
+let add= document.getElementById("add");
+let sub=document.getElementById("sub");
+let mul=document.getElementById("mul");
+let div=document.getElementById("div");
+let ans=document.getElementById("ans");
+let clr=document.getElementById("clr");
+
+function addd(){
+                let result= parseFloat(num1.value) + parseFloat(num2.value);
+                 ans.innerText=result; }
+
+function subb(){
+                let result= parseFloat(num1.value) - parseFloat(num2.value);
+                 ans.innerText=result; }
+
+function mull(){
+                let result= parseFloat(num1.value) * parseFloat(num2.value);
+                 ans.innerText=result; }
+
+function divv(){
+                let result= parseFloat(num1.value) / parseFloat(num2.value);
+                 ans.innerText=result; }
+
+function clrr(){
+                let a=document.getElementById("ans");
+                ans.innerText="" ;}
+
+function cc(){
+
+              bs.style.backgroundColor= "yellow";
+            }
+
+  bs.onclick = cc;
+
+  function cr1(){
+                  let result=document.getElementById("num1").value="";
+  }
+
+  function cr2(){
+                  let result=document.getElementById("num2").value="";
+  }
+
+  function clear(){ cr1();
+                    cr2();
+                    clrr();
+
+  }
+
+  clr.onclick= clear;
+  
+               
+        
+
+</script>
+</body>
+</html>
