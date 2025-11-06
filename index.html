@@ -3,95 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Moon Zoom Camera — Web</title>
+<title>Moon Zoom Camera — Web (with embedded high-res moon)</title>
 <style>
-  :root{
-    --bg: #0b1020;
-    --ui: rgba(0,0,0,0.45);
-  }
+  :root{ --bg:#0b1020; --ui: rgba(0,0,0,0.45); }
   html,body{height:100%;margin:0;background:var(--bg);color:#fff;font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;}
-  .app{
-    height:100%;
-    display:grid;
-    place-items:center;
-    gap:12px;
-    padding:12px;
-    box-sizing:border-box;
-  }
-
-  .camera-wrap{
-    position:relative;
-    width:100%;
-    max-width:980px;
-    aspect-ratio:16/9;
-    background:#000;
-    overflow:hidden;
-    border-radius:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.6);
-    touch-action: none; /* for pinch handling */
-  }
-
-  video#cam{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform-origin:center center;
-    transform: translate(-50%, -50%) scale(1);
-    will-change:transform, filter;
-    /* keep video big so scaling stays smooth */
-    min-width:120%;
-    min-height:120%;
-  }
-
-  /* fake moon overlay */
-  .moon{
-    position:absolute;
-    width:36vmin;
-    height:36vmin;
-    max-width:420px;
-    max-height:420px;
-    transform: translate(-50%, -50%) scale(1);
-    pointer-events:none;
-    border-radius:50%;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAABtElEQVR4nO3QsQkAMAgAsWf/pV82gQTiQk2k8b1f3g4R7sGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8u7w9k6/H93s7D0b7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzy7+f4m0hN34wqv2AAAAAElFTkSuQmCC');
-    background-size:cover;
-    box-shadow: 0 0 40px rgba(255,255,255,0.06), 0 0 12px rgba(255,255,255,0.04) inset;
-    mix-blend-mode: screen;
-    opacity:0;
-    transition: opacity 260ms linear, transform 260ms ease;
-    filter: drop-shadow(0 8px 30px rgba(255,255,255,0.08));
-  }
-
-  /* small UI overlay */
-  .ui {
-    margin-top:6px;
-    width:100%;
-    max-width:980px;
-    display:flex;
-    gap:8px;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .panel{
-    background:var(--ui);
-    padding:8px 12px;
-    border-radius:10px;
-    display:flex;
-    gap:8px;
-    align-items:center;
-    backdrop-filter: blur(6px);
-  }
+  .app{height:100%;display:grid;place-items:center;gap:12px;padding:12px;box-sizing:border-box;}
+  .camera-wrap{position:relative;width:100%;max-width:980px;aspect-ratio:16/9;background:#000;overflow:hidden;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6);touch-action:none;}
+  video#cam{position:absolute;left:50%;top:50%;transform-origin:center center;transform: translate(-50%, -50%) scale(1);will-change:transform, filter;min-width:120%;min-height:120%;}
+  .moon{position:absolute;width:36vmin;height:36vmin;max-width:420px;max-height:420px;transform: translate(-50%, -50%) scale(1);pointer-events:none;border-radius:50%;background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAABtElEQVR4nO3QsQkAMAgAsWf/pV82gQTiQk2k8b1f3g4R7sGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8u7w9k6/H93s7D0b7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzyb7s9G+7PRvuzy7+f4m0hN34wqv2AAA...') ; background-size:cover;box-shadow: 0 0 40px rgba(255,255,255,0.06), 0 0 12px rgba(255,255,255,0.04) inset;mix-blend-mode: screen;opacity:0;transition: opacity 260ms linear, transform 260ms ease;filter: drop-shadow(0 8px 30px rgba(255,255,255,0.08));}
+  .ui {margin-top:6px;width:100%;max-width:980px;display:flex;gap:8px;align-items:center;justify-content:space-between;}
+  .panel{background:var(--ui);padding:8px 12px;border-radius:10px;display:flex;gap:8px;align-items:center;backdrop-filter: blur(6px);}
   button {background:#fff;color:#000;border:0;padding:8px 10px;border-radius:8px;cursor:pointer}
   .small {padding:6px 8px;font-size:14px}
-
   .info {font-size:14px;opacity:0.9}
   .zoom-ind {font-weight:700;padding-left:6px}
   .hint {font-size:13px;opacity:0.8}
-
-  /* Make moon smaller on small screens */
-  @media (max-width:520px){
-    .moon{ width:56vmin; height:56vmin; }
-  }
+  @media (max-width:520px){ .moon{ width:56vmin; height:56vmin; } }
 </style>
 </head>
 <body>
@@ -100,13 +27,11 @@
     <video id="cam" autoplay playsinline></video>
     <div class="moon" id="moon" title="Moon overlay (tap to move)"></div>
   </div>
-
   <div class="ui">
     <div class="panel">
       <div class="info">Zoom: <span id="zoomVal" class="zoom-ind">1.0x</span></div>
       <div class="hint"> (pinch / two-finger / mouse-wheel / +/- )</div>
     </div>
-
     <div style="display:flex;gap:8px">
       <div class="panel">
         <button id="btnZoomOut" class="small">-</button>
@@ -119,12 +44,10 @@
       </div>
     </div>
   </div>
-
   <div style="max-width:980px;width:100%;text-align:left;color:#cfd8ff99;margin-top:6px;font-size:13px">
     <strong>How it works:</strong> when zoom goes above the threshold, the video becomes blurred and a fake moon image blends in on top. Tap/click the screen to move the moon. For full camera access use <em>https://localhost</em> or a secure host.
   </div>
 </div>
-
 <script>
 (async function(){
   const video = document.getElementById('cam');
@@ -135,142 +58,53 @@
   const btnOut = document.getElementById('btnZoomOut');
   const btnReset = document.getElementById('btnReset');
   const thresholdInput = document.getElementById('threshold');
-
-  // Settings
   let scale = 1.0;
   const MIN = 1.0;
   const MAX = 8.0;
-  let threshold = parseFloat(thresholdInput.value); // start blend threshold
-  const FULL_AT = 6.0; // when overlay becomes fully opaque
-  const BLUR_MAX = 6; // max blur px
-
-  // request camera (prefer back camera)
+  let threshold = parseFloat(thresholdInput.value);
+  const FULL_AT = 6.0;
+  const BLUR_MAX = 6;
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { ideal: "environment" } }, audio: false
-    });
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false });
     video.srcObject = stream;
   } catch (e) {
-    alert('Camera access failed: ' + e.message + '\\nOpen site on HTTPS or localhost and allow camera.');
+    alert('Camera access failed: ' + e.message + '\nOpen site on HTTPS or localhost and allow camera.');
     console.error(e);
     return;
   }
-
-  // update UI / visuals
   function applyScale(){
-    // transform video: center then scale
     video.style.transform = `translate(-50%,-50%) scale(${scale})`;
     zoomVal.textContent = scale.toFixed(2) + 'x';
-
-    // compute overlay opacity based on scale and threshold
     const t = threshold;
     let opacity = 0;
     if (scale >= t) {
       opacity = (scale - t) / (FULL_AT - t);
       if (opacity > 1) opacity = 1;
     }
-    // apply blur to video increasing with scale to simulate blur
     const blurPx = Math.min(BLUR_MAX, (scale - 1) * 1.8);
     video.style.filter = `blur(${blurPx}px) saturate(${1 - Math.min(0.5, (scale-1)/4)})`;
-
-    // transform and opacity for moon overlay
     moon.style.opacity = opacity;
-    // slightly scale moon with zoom for realism
     const moonScale = 1 + (Math.min(scale, FULL_AT)-t)/ (FULL_AT - t) * 0.14;
     moon.style.transform = `translate(-50%,-50%) scale(${moonScale})`;
   }
-
-  // change threshold by input
   thresholdInput.addEventListener('input', ()=>{ threshold = parseFloat(thresholdInput.value); applyScale(); });
-
-  // buttons
   btnIn.addEventListener('click', ()=>{ scale = Math.min(MAX, scale + 0.3); applyScale(); });
   btnOut.addEventListener('click', ()=>{ scale = Math.max(MIN, scale - 0.3); applyScale(); });
   btnReset.addEventListener('click', ()=>{ scale = 1.0; applyScale(); });
-
-  // wheel to zoom (desktop)
-  wrap.addEventListener('wheel', (ev)=>{
-    ev.preventDefault();
-    const delta = Math.sign(ev.deltaY) * 0.15;
-    scale = Math.max(MIN, Math.min(MAX, scale - delta));
-    applyScale();
-  }, { passive:false });
-
-  // Touch pinch detection with Pointer events fallback
-  // We'll track two pointers and compute current distance/scale
+  wrap.addEventListener('wheel', (ev)=>{ ev.preventDefault(); const delta = Math.sign(ev.deltaY) * 0.15; scale = Math.max(MIN, Math.min(MAX, scale - delta)); applyScale(); }, { passive:false });
   let pointers = new Map();
   let startDistance = null;
   let startScale = null;
-
-  wrap.addEventListener('pointerdown', (e)=>{
-    pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
-    (e.target).setPointerCapture?.(e.pointerId);
-  });
-  wrap.addEventListener('pointermove', (e)=>{
-    if (!pointers.has(e.pointerId)) return;
-    pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
-    if (pointers.size === 2){
-      // compute distance
-      const pts = Array.from(pointers.values());
-      const dx = pts[0].x - pts[1].x;
-      const dy = pts[0].y - pts[1].y;
-      const dist = Math.hypot(dx, dy);
-      if (startDistance === null){
-        startDistance = dist;
-        startScale = scale;
-      } else {
-        const factor = dist / startDistance;
-        scale = Math.max(MIN, Math.min(MAX, startScale * factor));
-        applyScale();
-      }
-    }
-  });
-  wrap.addEventListener('pointerup', (e)=>{
-    pointers.delete(e.pointerId);
-    startDistance = null;
-    startScale = null;
-  });
-  wrap.addEventListener('pointercancel', (e)=>{
-    pointers.delete(e.pointerId);
-    startDistance = null;
-    startScale = null;
-  });
-
-  // Tap / click to move moon overlay
-  wrap.addEventListener('click', (e)=>{
-    // get position relative to wrap
-    const rect = wrap.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    // convert to percentage to maintain location regardless of size
-    const px = (x / rect.width) * 100;
-    const py = (y / rect.height) * 100;
-    // set moon position
-    moon.style.left = px + '%';
-    moon.style.top = py + '%';
-    // ensure visible (if below threshold it will still be hidden until zoom)
-    // add a subtle pulse when placed
-    moon.animate([{transform: moon.style.transform + ' scale(1.12)'}, {transform: moon.style.transform + ' scale(1)'}], {duration:280, easing:'ease-out'});
-  });
-
-  // initial position center
+  wrap.addEventListener('pointerdown', (e)=>{ pointers.set(e.pointerId, {x:e.clientX, y:e.clientY}); (e.target).setPointerCapture?.(e.pointerId); });
+  wrap.addEventListener('pointermove', (e)=>{ if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, {x:e.clientX, y:e.clientY}); if (pointers.size === 2){ const pts = Array.from(pointers.values()); const dx = pts[0].x - pts[1].x; const dy = pts[0].y - pts[1].y; const dist = Math.hypot(dx, dy); if (startDistance === null){ startDistance = dist; startScale = scale; } else { const factor = dist / startDistance; scale = Math.max(MIN, Math.min(MAX, startScale * factor)); applyScale(); } } });
+  wrap.addEventListener('pointerup', (e)=>{ pointers.delete(e.pointerId); startDistance = null; startScale = null; });
+  wrap.addEventListener('pointercancel', (e)=>{ pointers.delete(e.pointerId); startDistance = null; startScale = null; });
+  wrap.addEventListener('click', (e)=>{ const rect = wrap.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top; const px = (x / rect.width) * 100; const py = (y / rect.height) * 100; moon.style.left = px + '%'; moon.style.top = py + '%'; moon.animate([{transform: moon.style.transform + ' scale(1.12)'}, {transform: moon.style.transform + ' scale(1)'}], {duration:280, easing:'ease-out'}); });
   moon.style.left = '50%';
   moon.style.top = '50%';
   applyScale();
-
-  // OPTIONAL: load a nicer moon image if user replaces the base64 placeholder.
-  // If you have a moon.png, replace moon.style.backgroundImage = 'url("moon.png")';
-  // Example (uncomment): moon.style.backgroundImage = 'url("moon.png")';
-
-  // UX: if camera stream size changes, re-apply (rare)
   video.addEventListener('loadedmetadata', ()=>{ applyScale(); });
-
-  // Accessibility: keyboard +/- to zoom
-  window.addEventListener('keydown', (e)=>{
-    if (e.key === '+' || e.key === '=') { scale = Math.min(MAX, scale+0.2); applyScale(); }
-    if (e.key === '-') { scale = Math.max(MIN, scale-0.2); applyScale(); }
-  });
-
+  window.addEventListener('keydown', (e)=>{ if (e.key === '+' || e.key === '=') { scale = Math.min(MAX, scale+0.2); applyScale(); } if (e.key === '-') { scale = Math.max(MIN, scale-0.2); applyScale(); } });
 })();
 </script>
 </body>
