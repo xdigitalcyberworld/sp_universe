@@ -6,96 +6,95 @@
 
 <style>
 body{
-font-family: Arial;
+font-family:Arial;
+background:#f4f4f4;
 margin:0;
-background:#f2f2f2;
 }
 
 header{
 background:#0a58ca;
 color:white;
-padding:15px;
 text-align:center;
+padding:15px;
 }
 
 .container{
 padding:20px;
 }
 
-.service{
+form{
 background:white;
-padding:15px;
-margin-bottom:15px;
+padding:20px;
 border-radius:10px;
-box-shadow:0 0 5px rgba(0,0,0,0.1);
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+max-width:400px;
+margin:auto;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin:10px 0;
 }
 
 button{
 background:#0a58ca;
 color:white;
-border:none;
-padding:10px 15px;
-border-radius:5px;
-cursor:pointer;
-}
-
-footer{
-background:#222;
-color:white;
-text-align:center;
 padding:10px;
+border:none;
+width:100%;
 }
-</style>
 
+</style>
 </head>
 
 <body>
 
 <header>
 <h2>X Digital Cyber World</h2>
-<p>Online Services & SIM Porting</p>
+<p>Online Service Request</p>
 </header>
 
 <div class="container">
 
-<div class="service">
-<h3>SIM Port Request</h3>
-<p>Port your SIM in 10 minutes</p>
-<a href="https://wa.me/917991679334?text=I want SIM Port">
-<button>Apply Now</button>
-</a>
-</div>
+<form onsubmit="sendWhatsApp(); return false;">
 
-<div class="service">
-<h3>PAN Card Apply</h3>
-<p>Apply PAN card online</p>
-<a href="https://wa.me/917991679334?text=I want PAN Card">
-<button>Apply Now</button>
-</a>
-</div>
+<input type="text" id="name" placeholder="Your Name" required>
 
-<div class="service">
-<h3>Online Certificates</h3>
-<p>Income / Caste / Residence</p>
-<a href="https://wa.me/917991679334?text=I want Certificate">
-<button>Apply Now</button>
-</a>
-</div>
+<input type="text" id="mobile" placeholder="Mobile Number" required>
 
-<div class="service">
-<h3>Smart TV Order</h3>
-<p>Android Smart TV Available</p>
-<a href="https://wa.me/917991679334?text=I want Smart TV">
-<button>Order Now</button>
-</a>
-</div>
+<select id="service">
+<option>SIM Port</option>
+<option>PAN Card</option>
+<option>Income Certificate</option>
+<option>Caste Certificate</option>
+<option>Smart TV Order</option>
+</select>
+
+<button type="submit">Submit Request</button>
+
+</form>
 
 </div>
 
-<footer>
-<p>Contact: 7991679334</p>
-<p>Mirzapur, Uttar Pradesh</p>
-</footer>
+<script>
+
+function sendWhatsApp(){
+
+var name=document.getElementById("name").value;
+var mobile=document.getElementById("mobile").value;
+var service=document.getElementById("service").value;
+
+var url="https://wa.me/917991679334?text="
++"Name:"+name+"%0a"
++"Mobile:"+mobile+"%0a"
++"Service:"+service;
+
+window.open(url,'_blank');
+
+}
+
+</script>
 
 </body>
 </html>
