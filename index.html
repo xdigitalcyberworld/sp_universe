@@ -1,48 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>X Digital Cyber World</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body{
-font-family:Arial;
-background:#f4f4f4;
+
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:linear-gradient(270deg,#0f2027,#203a43,#2c5364);
+background-size:600% 600%;
+animation:bgmove 10s infinite alternate;
+color:white;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+100%{background-position:100% 50%;}
 }
 
 header{
-background:#0a58ca;
-color:white;
 text-align:center;
-padding:15px;
+padding:50px;
+font-size:30px;
+font-weight:bold;
 }
 
 .container{
-padding:20px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+padding:40px;
 }
 
-form{
+.card{
+width:250px;
+padding:25px;
+border-radius:20px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+text-align:center;
+transition:0.4s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:rotateY(15deg) scale(1.1);
+box-shadow:0 0 20px cyan;
+}
+
+.card img{
+width:80px;
+margin-bottom:15px;
+}
+
+.card h2{
+margin-bottom:10px;
+}
+
+.contact{
+text-align:center;
+padding:60px;
+}
+
+.btn{
+display:inline-block;
+padding:12px 30px;
+background:#00eaff;
+color:black;
+font-weight:bold;
+border-radius:30px;
+text-decoration:none;
+margin-top:20px;
+}
+
+.btn:hover{
 background:white;
+}
+
+footer{
+text-align:center;
 padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-max-width:400px;
-margin:auto;
-}
-
-input,select{
-width:100%;
-padding:10px;
-margin:10px 0;
-}
-
-button{
-background:#0a58ca;
-color:white;
-padding:10px;
-border:none;
-width:100%;
+background:black;
 }
 
 </style>
@@ -51,48 +98,100 @@ width:100%;
 <body>
 
 <header>
-<h2>X Digital Cyber World</h2>
-<p>Online Service Request</p>
+X Digital Cyber World  
+<p style="font-size:18px;">All Digital & Electronics Services</p>
 </header>
 
 <div class="container">
 
-<form onsubmit="sendWhatsApp(); return false;">
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png">
+<h2>Spizen Smart TV</h2>
+<p>
+24" ₹6200<br>
+32" ₹9500<br>
+43" ₹17500
+</p>
+</div>
 
-<input type="text" id="name" placeholder="Your Name" required>
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/597/597177.png">
+<h2>SIM Services</h2>
+<p>
+SIM Porting<br>
+New SIM Help<br>
+Lost SIM Recovery
+</p>
+</div>
 
-<input type="text" id="mobile" placeholder="Mobile Number" required>
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png">
+<h2>PAN Card</h2>
+<p>
+PAN Apply<br>
+Only ₹150
+</p>
+</div>
 
-<select id="service">
-<option>SIM Port</option>
-<option>PAN Card</option>
-<option>Income Certificate</option>
-<option>Caste Certificate</option>
-<option>Smart TV Order</option>
-</select>
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/1792/1792896.png">
+<h2>Computer Service</h2>
+<p>
+Windows Install<br>
+With Software<br>
+₹150
+</p>
+</div>
 
-<button type="submit">Submit Request</button>
-
-</form>
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/747/747376.png">
+<h2>Online Certificates</h2>
+<p>
+Income Certificate<br>
+Caste Certificate<br>
+Residence Certificate
+</p>
+</div>
 
 </div>
 
+<div class="contact">
+
+<h2>Contact Us</h2>
+
+<p style="margin-top:10px;">📞 7991679334</p>
+
+<a href="https://wa.me/917991679334" class="btn">
+Chat on WhatsApp
+</a>
+
+</div>
+
+<footer>
+© 2026 X Digital Cyber World
+</footer>
+
 <script>
 
-function sendWhatsApp(){
+document.querySelectorAll(".card").forEach(card=>{
 
-var name=document.getElementById("name").value;
-var mobile=document.getElementById("mobile").value;
-var service=document.getElementById("service").value;
+card.addEventListener("mousemove",(e)=>{
 
-var url="https://wa.me/917991679334?text="
-+"Name:"+name+"%0a"
-+"Mobile:"+mobile+"%0a"
-+"Service:"+service;
+let x=e.offsetX
+let y=e.offsetY
 
-window.open(url,'_blank');
+card.style.transform=
+"rotateX("+(-y/20)+"deg) rotateY("+(x/20)+"deg) scale(1.08)"
 
-}
+})
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.transform="rotateX(0) rotateY(0) scale(1)"
+
+})
+
+})
 
 </script>
 
