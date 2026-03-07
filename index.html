@@ -42,7 +42,7 @@ label{
 font-size:14px;
 }
 
-input,select{
+input,select,textarea{
 width:100%;
 padding:12px;
 margin:8px 0;
@@ -64,8 +64,10 @@ cursor:pointer;
 margin-top:10px;
 }
 
-button:active{
-transform:scale(0.98);
+.preview{
+width:100%;
+margin-top:10px;
+border-radius:8px;
 }
 
 </style>
@@ -79,10 +81,13 @@ transform:scale(0.98);
 <h2>सिम पोर्ट बिल्कुल फ्री</h2>
 
 <label>ग्राहक का नाम</label>
-<input type="text" id="name">
+<input type="text" id="name" required>
 
 <label>मोबाइल नंबर</label>
-<input type="tel" id="mobile">
+<input type="tel" id="mobile" maxlength="10" placeholder="10 अंकों का नंबर">
+
+<label>आधार के अनुसार पूरा पता</label>
+<textarea id="address"></textarea>
 
 <label>वर्तमान सिम कंपनी</label>
 <select id="company">
@@ -112,25 +117,48 @@ transform:scale(0.98);
 <option>नहीं</option>
 </select>
 
+<label>आधार कार्ड फोटो</label>
+<input type="file" id="aadhaar" accept="image/*" capture="environment">
+
+<img id="preview" class="preview">
+
 <button onclick="sendWhatsApp()">सबमिट करें</button>
 
 </div>
 
 <script>
 
+document.getElementById("aadhaar").onchange=function(e){
+
+var reader=new FileReader();
+reader.onload=function(){
+document.getElementById("preview").src=reader.result;
+}
+
+reader.readAsDataURL(e.target.files[0]);
+
+}
+
 function sendWhatsApp(){
 
 var name=document.getElementById("name").value;
 var mobile=document.getElementById("mobile").value;
+var address=document.getElementById("address").value;
 var company=document.getElementById("company").value;
 var portto=document.getElementById("portto").value;
 var days=document.getElementById("days").value;
 var recharge=document.getElementById("recharge").value;
 
+if(mobile.length!=10){
+alert("कृपया 10 अंकों का मोबाइल नंबर डालें");
+return;
+}
+
 var message=
 "📱 सिम पोर्ट रिक्वेस्ट%0A%0A"+
 "नाम: "+name+"%0A"+
 "मोबाइल नंबर: "+mobile+"%0A"+
+"पता: "+address+"%0A"+
 "वर्तमान कंपनी: "+company+"%0A"+
 "पोर्ट कंपनी: "+portto+"%0A"+
 "सिम 90 दिन पुराना: "+days+"%0A"+
