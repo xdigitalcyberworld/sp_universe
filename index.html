@@ -1,200 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>X Digital Cyber World</title>
+
+<title>सिम पोर्ट बिल्कुल फ्री</title>
 
 <style>
 
 body{
-font-family:Arial;
+font-family:"Noto Sans Devanagari",Arial;
+background:#f2f2f2;
+padding:10px;
 margin:0;
-background:#f1f3f6;
-}
-
-header{
-background:#2874f0;
-color:white;
-padding:15px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.logo img{
-height:40px;
-}
-
-.search{
-width:40%;
-}
-
-.search input{
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
 }
 
 .container{
-padding:20px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.card{
-background:white;
-border-radius:10px;
-padding:15px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-transition:0.3s;
-text-align:center;
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-.card img{
 width:100%;
+max-width:420px;
+background:white;
+padding:18px;
 border-radius:10px;
+margin:auto;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.price{
-color:green;
-font-size:20px;
-font-weight:bold;
+h1{
+font-size:22px;
+text-align:center;
+margin-bottom:5px;
 }
 
-.btn{
-background:#fb641b;
+h2{
+font-size:18px;
+text-align:center;
+margin-bottom:15px;
+}
+
+label{
+font-size:14px;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:16px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#25D366;
 color:white;
-padding:10px 15px;
 border:none;
-border-radius:5px;
+font-size:17px;
+border-radius:6px;
 cursor:pointer;
 margin-top:10px;
 }
 
-.btn:hover{
-background:#ff8f00;
-}
-
-footer{
-background:#172337;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
+button:active{
+transform:scale(0.98);
 }
 
 </style>
-
 </head>
 
 <body>
 
-<header>
-
-<div class="logo">
-<img src="logo.png">
-<h2>X Digital Cyber World</h2>
-</div>
-
-<div class="search">
-<input type="text" placeholder="Search products...">
-</div>
-
-</header>
-
 <div class="container">
 
-<h2>Smart TV</h2>
+<h1>📱 X Digital Cyber World</h1>
+<h2>सिम पोर्ट बिल्कुल फ्री</h2>
 
-<div class="grid">
+<label>ग्राहक का नाम</label>
+<input type="text" id="name">
 
-<div class="card">
-<img src="tvposter.jpg">
-<h3>Spizen Smart TV 24"</h3>
-<p class="price">₹6200</p>
-<button class="btn">Buy Now</button>
-</div>
+<label>मोबाइल नंबर</label>
+<input type="tel" id="mobile">
 
-<div class="card">
-<img src="tvposter.jpg">
-<h3>Spizen Smart TV 32"</h3>
-<p class="price">₹9500</p>
-<button class="btn">Buy Now</button>
-</div>
+<label>वर्तमान सिम कंपनी</label>
+<select id="company">
+<option>Jio</option>
+<option>Airtel</option>
+<option>VI</option>
+<option>BSNL</option>
+</select>
 
-<div class="card">
-<img src="tvposter.jpg">
-<h3>Spizen Smart TV 43"</h3>
-<p class="price">₹17500</p>
-<button class="btn">Buy Now</button>
-</div>
+<label>किस कंपनी में पोर्ट करना है</label>
+<select id="portto">
+<option>Jio</option>
+<option>Airtel</option>
+<option>VI</option>
+<option>BSNL</option>
+</select>
 
-</div>
+<label>क्या सिम 90 दिन पुराना है?</label>
+<select id="days">
+<option>हाँ</option>
+<option>नहीं</option>
+</select>
 
-<h2 style="margin-top:40px;">SIM Services</h2>
+<label>क्या सिम में रिचार्ज है?</label>
+<select id="recharge">
+<option>हाँ</option>
+<option>नहीं</option>
+</select>
 
-<div class="grid">
-
-<div class="card">
-<img src="sim.jpg">
-<h3>SIM Porting Service</h3>
-<p>Airtel / Jio / VI / BSNL</p>
-<button class="btn">Contact</button>
-</div>
-
-<div class="card">
-<img src="sim.jpg">
-<h3>New SIM Activation</h3>
-<p>All Network Available</p>
-<button class="btn">Contact</button>
-</div>
+<button onclick="sendWhatsApp()">सबमिट करें</button>
 
 </div>
 
-<h2 style="margin-top:40px;">Digital Services</h2>
+<script>
 
-<div class="grid">
+function sendWhatsApp(){
 
-<div class="card">
-<img src="shoplogo.jpg">
-<h3>PAN Card Apply</h3>
-<p class="price">₹150</p>
-<button class="btn">Apply Now</button>
-</div>
+var name=document.getElementById("name").value;
+var mobile=document.getElementById("mobile").value;
+var company=document.getElementById("company").value;
+var portto=document.getElementById("portto").value;
+var days=document.getElementById("days").value;
+var recharge=document.getElementById("recharge").value;
 
-<div class="card">
-<img src="shoplogo.jpg">
-<h3>Windows Install</h3>
-<p class="price">₹150</p>
-<button class="btn">Book Service</button>
-</div>
+var message=
+"📱 सिम पोर्ट रिक्वेस्ट%0A%0A"+
+"नाम: "+name+"%0A"+
+"मोबाइल नंबर: "+mobile+"%0A"+
+"वर्तमान कंपनी: "+company+"%0A"+
+"पोर्ट कंपनी: "+portto+"%0A"+
+"सिम 90 दिन पुराना: "+days+"%0A"+
+"रिचार्ज है: "+recharge;
 
-</div>
+var whatsapp="https://wa.me/917991679334?text="+message;
 
-</div>
+window.open(whatsapp,'_blank');
 
-<footer>
+}
 
-<p>📞 7991679334</p>
-<p>Aahi Jamua Bazar Mirzapur</p>
-
-</footer>
+</script>
 
 </body>
 </html>
