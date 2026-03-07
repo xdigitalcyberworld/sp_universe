@@ -64,12 +64,6 @@ cursor:pointer;
 margin-top:10px;
 }
 
-.preview{
-width:100%;
-margin-top:10px;
-border-radius:8px;
-}
-
 </style>
 </head>
 
@@ -78,10 +72,10 @@ border-radius:8px;
 <div class="container">
 
 <h1>📱 X Digital Cyber World</h1>
-<h2>सिम पोर्ट बिल्कुल फ्री</h2>
+<h2>📱 सिम पोर्ट बिल्कुल फ्री</h2>
 
 <label>ग्राहक का नाम</label>
-<input type="text" id="name" required>
+<input type="text" id="name">
 
 <label>मोबाइल नंबर</label>
 <input type="tel" id="mobile" maxlength="10" placeholder="10 अंकों का नंबर">
@@ -117,27 +111,11 @@ border-radius:8px;
 <option>नहीं</option>
 </select>
 
-<label>आधार कार्ड फोटो</label>
-<input type="file" id="aadhaar" accept="image/*" capture="environment">
-
-<img id="preview" class="preview">
-
 <button onclick="sendWhatsApp()">सबमिट करें</button>
 
 </div>
 
 <script>
-
-document.getElementById("aadhaar").onchange=function(e){
-
-var reader=new FileReader();
-reader.onload=function(){
-document.getElementById("preview").src=reader.result;
-}
-
-reader.readAsDataURL(e.target.files[0]);
-
-}
 
 function sendWhatsApp(){
 
